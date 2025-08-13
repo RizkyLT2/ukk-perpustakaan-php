@@ -5,7 +5,7 @@
 
     
 
-        $query = "SELECT * FROM tbl_siswa";
+        $query = "SELECT * FROM siswa";
         $stmt = $pdo->query($query);
         $datas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -30,9 +30,9 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Nama Siswa</th>
-                            <th>Kelas</th>
-                            <th>No Induk</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>No Hp</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -44,18 +44,17 @@
                                 <?= $key + 1 ?>
                             </td>
                             <td>
-                                <?= $data['nama_siswa'] ?>
+                                <?= $data['nama'] ?>
                             </td>
                             <td>
-                                <?= $data['kelas'] ?>
+                                <?= $data['email'] ?>
                             </td>
                             <td>
-                                <?= $data['nomor_induk'] ?>
+                                <?= $data['no_hp'] ?>
                             </td>
                             <td class="text-center">
-                                <a href="/pages/siswa/detail.php?siswa_id=<?= $data['id_siswa'] ?>" class="btn btn-sm btn-outline-info">Detail</a>
-                                <a href="/pages/siswa/edit.php?siswa_id=<?= $data['id_siswa'] ?>" class="btn btn-sm btn-outline-warning">Ubah</a>
-                                <a href="/pages/siswa/delete.php?siswa_id=<?= $data['id_siswa'] ?>" class="btn btn-sm btn-outline-danger">Hapus</a>
+                                <a href="/pages/siswa/edit.php?id_siswa=<?= $data['id_siswa'] ?>" class="btn btn-sm btn-outline-warning">Ubah</a>
+                                <a href="/pages/siswa/delete.php?id_siswa=<?= $data['id_siswa'] ?>" class="btn btn-sm btn-outline-danger">Hapus</a>
                             </td>
                         </tr>
                         <?php endforeach; ?>

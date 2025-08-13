@@ -6,9 +6,9 @@
     
 
         $query = "
-            SELECT tbl_peminjam.*, tbl_buku.judul, tbl_siswa.nama_siswa FROM tbl_peminjam 
-            join tbl_buku on tbl_peminjam.id_buku = tbl_buku.id_buku
-            join tbl_siswa on tbl_peminjam.id_siswa = tbl_siswa.id_siswa
+            SELECT pendaftaran.*, kursus.nama_kursus, siswa.nama FROM pendaftaran 
+            join kursus on pendaftaran.id_kursus = kursus.id_kursus
+            join siswa on pendaftaran.id_siswa = siswa.id_siswa
         ";
         $stmt = $pdo->query($query);
         $datas = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -22,7 +22,7 @@
                 <h1>List Data</h1>
             </div>
             <div class="col text-end">
-                <a href="/pages/peminjam/create.php" class="btn btn-outline-primary"> 
+                <a href="/pages/pendaftaran/create.php" class="btn btn-outline-primary"> 
                     Tambah Data
                 </a>
             </div>
@@ -35,9 +35,8 @@
                         <tr>
                             <th>No.</th>
                             <th>Nama Siswa</th>
-                            <th>Judul</th>
-                            <th>status</th>
-                            <th>tanggal Pinjam</th>
+                            <th>Nama Kursus</th>
+                            <th>tanggal Pendaftaran</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -49,21 +48,17 @@
                                 <?= $key + 1 ?>
                             </td>
                             <td>
-                                <?= $data['nama_siswa'] ?>
+                                <?= $data['nama'] ?>
                             </td>
                             <td>
-                                <?= $data['judul'] ?>
+                                <?= $data['nama_kursus'] ?>
                             </td>
                             <td>
-                                <?= $data['status'] ?>
-                            </td>
-                            <td>
-                                <?= $data['tanggal_pinjam'] ?>
+                                <?= $data['tanggal_daftar'] ?>
                             </td>
                             <td class="text-center">
-                                <a href="/pages/peminjam/detail.php?peminjam_id=<?= $data['id_peminjam'] ?>" class="btn btn-sm btn-outline-info">Detail</a>
-                                <a href="/pages/peminjam/edit.php?peminjam_id=<?= $data['id_peminjam'] ?>" class="btn btn-sm btn-outline-warning">Ubah</a>
-                                <a href="/pages/peminjam/delete.php?peminjam_id=<?= $data['id_peminjam'] ?>" class="btn btn-sm btn-outline-danger">Hapus</a>
+                                <a href="/pages/pendaftaran/edit.php?id_pendaftaran=<?= $data['id_pendaftaran'] ?>" class="btn btn-sm btn-outline-warning">Ubah</a>
+                                <a href="/pages/pendaftaran/delete.php?id_pendaftaran=<?= $data['id_pendaftaran'] ?>" class="btn btn-sm btn-outline-danger">Hapus</a>
                             </td>
                         </tr>
                         <?php endforeach; ?>

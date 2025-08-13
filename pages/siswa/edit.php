@@ -3,9 +3,9 @@
 
     <?php
         
-        if (isset($_GET['siswa_id'])) {
-            $siswa_id = $_GET['siswa_id'];
-            $query = "SELECT * FROM tbl_siswa where id_siswa = " . $siswa_id . " limit 1";
+        if (isset($_GET['id_siswa'])) {
+            $id_siswa = $_GET['id_siswa'];
+            $query = "SELECT * FROM siswa where id_siswa = " . $id_siswa . " limit 1";
             $stmt = $pdo->query($query);
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
             
@@ -29,16 +29,16 @@
             <div class="col">
                 <form action="" method="post">
                     <div class="mb-3">
-                        <label for="inputNama" class="form-label">Nama Siswa</label>
-                        <input type="text" name="nama_siswa" value="<?= $data['nama_siswa'] ?>" class="form-control" id="inputName" placeholder="Masukkan Nama Siswa" required>
+                        <label for="nama" class="form-label">Nama Siswa</label>
+                        <input type="text" name="nama" value="<?= $data['nama'] ?>" class="form-control" id="nama" placeholder="Masukkan Nama Siswa" required>
                     </div>
                     <div class="mb-3">
-                        <label for="inputKelas" class="form-label">Kelas</label>
-                        <input type="text" name="kelas" value="<?= $data['kelas'] ?>" class="form-control" id="inputKelas" placeholder="Masukkan Kelas Siswa" required>
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" name="email" value="<?= $data['email'] ?>" class="form-control" id="email" placeholder="Masukkan Email Siswa" required>
                     </div>
                     <div class="mb-3">
-                        <label for="inputnoinduk" class="form-label">no induk</label>
-                        <input type="int" name="nomor_induk" class="form-control">
+                        <label for="no_hp" class="form-label">no Hp</label>
+                        <input type="number" name="no_hp" value="<?= $data['no_hp'] ?>" class="form-control" id="no_hp">
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary btn-sm">Update</button>
@@ -49,19 +49,20 @@
                 <?php 
                     
                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        $nama = $_POST['nama_siswa'];
-                        $kelas = $_POST['kelas'];
-                        $nomor_induk = $_POST['nomor_induk'];                        
+                        $nama = $_POST['nama'];
+                        $email = $_POST['email'];
+                        $no_hp = $_POST['no_hp'];                        
 
-                        $query = "UPDATE tbl_siswa SET nama_siswa = :nama_siswa, kelas = :kelas";
+                        $query = "UPDATE siswa SET nama = :nama, email = :email, no_hp = :no_hp";
 
                         $query .= " WHERE id_siswa = :id_siswa";
                         
                         $stmt = $pdo->prepare($query);
                         
-                        $stmt->bindParam(':id_siswa', $siswa_id);
-                        $stmt->bindParam(':nama_siswa', $nama);
-                        $stmt->bindParam(':kelas', $kelas);
+                        $stmt->bindParam(':id_siswa', $id_siswa);
+                        $stmt->bindParam(':nama', $nama);
+                        $stmt->bindParam(':email', $email);
+                        $stmt->bindParam(':no_hp', $no_hp);
                         
                         if ($stmt->execute()) {
                             echo "<script>alert('Data berhasil diubah!'); window.location.replace('/pages/siswa/index.php');</script>";

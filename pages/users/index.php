@@ -5,7 +5,7 @@
 
     
 
-        $query = "SELECT * FROM tbl_user";
+        $query = "SELECT * FROM users";
         $stmt = $pdo->query($query);
         $datas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -18,7 +18,7 @@
                 <h1>List Data Pengguna</h1>
             </div>
             <div class="col text-end">
-                <a href="create.php" class="btn btn-outline-primary"> 
+                <a href="/pages/users/create.php" class="btn btn-outline-primary"> 
                     Tambah Data Pengguna
                 </a>
             </div>
@@ -30,8 +30,7 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Nama</th>
-                            <th>Email</th>
+                            <th>Username</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -43,15 +42,11 @@
                                 <?= $key + 1 ?>
                             </td>
                             <td>
-                                <?= $data['nama'] ?>
-                            </td>
-                            <td>
-                                <?= $data['email'] ?>
+                                <?= $data['username'] ?>
                             </td>
                             <td class="text-center">
-                                <a href="/pages/users/detail.php?user_id=<?= $data['id'] ?>" class="btn btn-sm btn-outline-info">Detail</a>
-                                <a href="/pages/users/edit.php?user_id=<?= $data['id'] ?>" class="btn btn-sm btn-outline-warning">Ubah</a>
-                                <a href="/pages/users/delete.php?user_id=<?= $data['id'] ?>" class="btn btn-sm btn-outline-danger">Hapus</a>
+                                <a href="/pages/users/edit.php?id_user=<?= $data['id_user'] ?>" class="btn btn-sm btn-outline-warning">Ubah</a>
+                                <a href="/pages/users/delete.php?id_user=<?= $data['id_user'] ?>" class="btn btn-sm btn-outline-danger">Hapus</a>
                             </td>
                         </tr>
                         <?php endforeach; ?>

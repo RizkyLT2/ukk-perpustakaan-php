@@ -5,7 +5,7 @@
 
     
 
-        $query = "SELECT * FROM tbl_buku";
+        $query = "SELECT * FROM kursus";
         $stmt = $pdo->query($query);
         $datas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -15,11 +15,11 @@
         <!-- baris judul halaman dan tombol tambah -->
         <div class="row align-items-center">
             <div class="col">
-                <h1>List Data Buku</h1>
+                <h1>List Data Kursus</h1>
             </div>
             <div class="col text-end">
-                <a href="/pages/books/create.php" class="btn btn-outline-primary"> 
-                    Tambah Data Buku
+                <a href="/pages/kursus/create.php" class="btn btn-outline-primary"> 
+                    Tambah Data kursus
                 </a>
             </div>
         </div>
@@ -30,9 +30,9 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Judul</th>
-                            <th>Pengarang</th>
-                            <th>Tahun Terbit</th>
+                            <th>Nama Kursus</th>
+                            <th>Deskripsi</th>
+                            <th>Biaya</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -44,18 +44,17 @@
                                 <?= $key + 1 ?>
                             </td>
                             <td>
-                                <?= $data['judul'] ?>
+                                <?= $data['nama_kursus'] ?>
                             </td>
                             <td>
-                                <?= $data['pengarang'] ?>
+                                <?= $data['deskripsi'] ?>
                             </td>
                             <td>
-                                <?= $data['tahun_terbit'] ?>
+                                <?= $data['biaya'] ?>
                             </td>
                             <td class="text-center">
-                                <a href="/pages/books/detail.php?books_id=<?= $data['id_buku'] ?>" class="btn btn-sm btn-outline-info">Detail</a>
-                                <a href="/pages/books/edit.php?books_id=<?= $data['id_buku'] ?>" class="btn btn-sm btn-outline-warning">Ubah</a>
-                                <a href="/pages/books/delete.php?books_id=<?= $data['id_buku'] ?>" class="btn btn-sm btn-outline-danger">Hapus</a>
+                                <a href="/pages/kursus/edit.php?id_kursus=<?= $data['id_kursus'] ?>" class="btn btn-sm btn-outline-warning">Ubah</a>
+                                <a href="/pages/kursus/delete.php?id_kursus=<?= $data['id_kursus'] ?>" class="btn btn-sm btn-outline-danger">Hapus</a>
                             </td>
                         </tr>
                         <?php endforeach; ?>

@@ -3,9 +3,9 @@
 
     <?php
         
-        if (isset($_GET['user_id'])) {
-            $user_id = $_GET['user_id'];
-            $query = "SELECT * FROM tbl_user where id = " . $user_id . " limit 1";
+        if (isset($_GET['id_user'])) {
+            $id_user = $_GET['id_user'];
+            $query = "SELECT * FROM users where id_user = " . $id_user . " limit 1";
             $stmt = $pdo->query($query);
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
             
@@ -29,16 +29,12 @@
             <div class="col">
                 <form action="" method="post">
                     <div class="mb-3">
-                        <label for="inputName" class="form-label">Nama</label>
-                        <input type="text" name="name" value="<?= $data['nama'] ?>" class="form-control" id="inputName" placeholder="Masukkan nama anda" required>
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" name="username" value="<?= $data['username'] ?>" class="form-control" id="username" placeholder="Masukkan username anda" required>
                     </div>
                     <div class="mb-3">
-                        <label for="inputEmail" class="form-label">Email</label>
-                        <input type="email" name="email" value="<?= $data['email'] ?>" class="form-control" id="inputEmail" placeholder="Masukkan email anda" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="inputPassword" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Masukkan password anda">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Masukkan password anda">
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary btn-sm">Update</button>
@@ -49,23 +45,21 @@
                 <?php 
                     
                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                        $name = $_POST['name'];
-                        $email = $_POST['email'];
+                        $username = $_POST['username'];
                         $password = $_POST['password'];                        
 
-                        $query = "UPDATE tbl_user SET nama = :name, email = :email";
+                        $query = "UPDATE users SET username = :username";
 
                         if ($password !== '') {
                             $query .= ", password = :password";
                         }
 
-                        $query .= " WHERE id = :id";
+                        $query .= " WHERE id_user = :id_user";
                         
                         $stmt = $pdo->prepare($query);
                         
-                        $stmt->bindParam(':id', $user_id);
-                        $stmt->bindParam(':name', $name);
-                        $stmt->bindParam(':email', $email);
+                        $stmt->bindParam(':id_user', $id_user);
+                        $stmt->bindParam(':username', $username);
                         if ($password !== '') {
                             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
                             $stmt->bindParam(':password', $hashed_password);

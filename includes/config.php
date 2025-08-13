@@ -1,6 +1,6 @@
 <?php
     $host = 'localhost';
-    $dbname = 'binjai_com_db';
+    $dbname = 'kursus_online_db';
     $username = 'root';
     $password = '';
 

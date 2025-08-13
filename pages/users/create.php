@@ -15,15 +15,11 @@
             <div class="col-md-12">
                 <form action="" method="post">
                     <div class="mb-3">
-                        <label for="nama-pengguna" class="form-label">Nama</label>
-                        <input type="name" name="name" class="form-control" id="nama-pengguna" placeholder="Masukkan nama anda">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="username" name="username" class="form-control" id="username" placeholder="Masukkan username anda">
                     </div>
                     <div class="mb-3">
-                        <label for="email-pengguna" class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" id="email-pengguna" placeholder="Masukkan email anda">
-                    </div>
-                    <div class="mb-3">
-                        <label for="password-pengguna" class="form-label">password</label>
+                        <label for="password" class="form-label">password</label>
                         <input type="password" name="password" class="form-control" id="password-pengguna" placeholder="Masukkan password anda">
                     </div>
                     <div class="mb-3">
@@ -41,19 +37,17 @@
 
             date_default_timezone_set('Asia/Jakarta');
 
-            $name = $_POST['name'];
-            $email = $_POST['email'];
+            $username = $_POST['username'];
             $password = $_POST['password'];
             $created_at = date("Y-m-d H:i:s");
 
             // Hashing the password
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-            $sql = "INSERT INTO tbl_user (nama, email, password) VALUES (:name, :email, :password)";
+            $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
             $stmt = $pdo->prepare($sql);
             
-            $stmt->bindParam(':name', $name);
-            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':username', $username);
             $stmt->bindParam(':password', $hashed_password);
             
             if ($stmt->execute()) {

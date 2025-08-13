@@ -1,13 +1,13 @@
 <?php
     require __DIR__ . '/../../includes/config.php';
 
-    if (isset($_GET['user_id'])) {
-        $user_id = $_GET['user_id'];
+    if (isset($_GET['id_user'])) {
+        $id_user = $_GET['id_user'];
 
-        $query = "DELETE FROM tbl_user WHERE id = :id";
+        $query = "DELETE FROM users WHERE id_user = :id_user";
         $stmt = $pdo->prepare($query);
         
-        $stmt->bindParam(':id', $user_id);
+        $stmt->bindParam(':id_user', $id_user);
         
         if ($stmt->execute()) {
             echo "<script>alert('Data berhasil dihapus!'); window.location.replace('/pages/users/index.php');</script>";

@@ -18,8 +18,8 @@
                         <h1 class="h3 mb-3 fw-normal">Silahkan Login!</h1>
 
                         <div class="form-floating mb-3">
-                            <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">Email address</label>
+                            <input type="username" name="username" class="form-control" id="floatingInput">
+                            <label for="floatingInput">Username</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
@@ -37,23 +37,23 @@
             session_start();
 
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $email = $_POST['email'];
+                $username = $_POST['username'];
                 $password = $_POST['password'];
 
-                $sql = "SELECT * FROM tbl_user WHERE email = :email";
+                $sql = "SELECT * FROM users WHERE username = :username";
                 $stmt = $pdo->prepare($sql);
-                $stmt->bindParam(':email', $email);
+                $stmt->bindParam(':username', $username);
                 $stmt->execute();
                 
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 
                 if ($user && password_verify($password, $user['password'])) {
-                    $_SESSION['user_id'] = $user['id'];
-                    $_SESSION['nama'] = $user['nama'];
+                    $_SESSION['id_user'] = $user['id_user'];
+                    $_SESSION['username'] = $user['username'];
                     echo "<script>alert('Berhasil masuk!'); window.location.replace('/index.php');</script>";
                     // Redirect to the dashboard or home page
                 } else {
-                    echo "<script>alert('Invalid email or password.')</script>";
+                    echo "<script>alert('Invalid username or password.')</script>";
                 }
             }
         ?>

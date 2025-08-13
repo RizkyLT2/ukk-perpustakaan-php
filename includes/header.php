@@ -2,7 +2,7 @@
     session_start();
 
     // Cek apakah pengguna sudah login
-    $is_logged_in = isset($_SESSION['user_id']);
+    $is_logged_in = isset($_SESSION['id_user']);
 
     // Jika belum login, arahkan ke halaman login
     if (!$is_logged_in) {
@@ -46,11 +46,11 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Buku
+            Kursus
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/pages/books">List Buku</a></li>
-            <li><a class="dropdown-item" href="/pages/books/create.php">Tambah Buku</a></li>
+            <li><a class="dropdown-item" href="/pages/Kursus">List Kursus</a></li>
+            <li><a class="dropdown-item" href="/pages/Kursus/create.php">Tambah Kursus</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -64,18 +64,18 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Peminjam
+            pendaftaran
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/pages/peminjam">List Peminjam</a></li>
-            <li><a class="dropdown-item" href="/pages/peminjam/create.php">Tambah Peminjam</a></li>
+            <li><a class="dropdown-item" href="/pages/pendaftaran">List pendaftaran</a></li>
+            <li><a class="dropdown-item" href="/pages/pendaftaran/create.php">Tambah pendaftaran</a></li>
           </ul>
         </li>
       </ul>
       <div class="d-flex logout">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <?=
-            $_SESSION['nama'];
+            $_SESSION['username'];
           ?>
         </a>
         <ul class="dropdown-menu">
